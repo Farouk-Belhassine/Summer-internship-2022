@@ -1,0 +1,86 @@
+h1{
+    color: #e2e2da;
+    text-align: center;
+}
+
+h2{
+    color: #e2e2da;
+    text-align: center;
+}
+
+li{
+    color: #e2e2da;
+}
+
+textarea{
+    width: 70%;
+}
+
+td{
+    color: #e2e2da;
+}
+
+body{
+    height:100vw;
+}
+
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+i.icon.ion-ios-checkmark{
+    font-size:60px;
+    color:#37b053;
+    text-shadow:2px 2px 4px #000000;
+}
+
+i.icon.ion-ios-undo{
+    font-size:60px;
+    color:#bcd636;
+    text-shadow:2px 2px 4px #000000;
+}
+
+i.icon.ion-android-arrow-dropright-circle{
+    font-size:60px;
+    color:#aab7e8;
+    text-shadow:2px 2px 4px #000000;
+}
+
+i.icon.ion-android-arrow-dropleft-circle{
+    font-size:60px;
+    color:#aab7e8;
+    text-shadow:2px 2px 4px #000000;
+}
+
+p{
+    color: #e2e2da;
+}
+
+label{
+    color: #e2e2da;
+}
+
+#te:hover {
+color: #57bba6;
+transition: color 0.3s;
+}
+
+hr {
+    border: none;
+    border-top: 3px double #718097;
+    color: #718097;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+}
+
+hr:after {
+    background-color: #3b3d40;
+    color: #99adca;
+    content: '§';
+    padding: 0 4px;
+    position: relative;
+    top: -13px;
+}

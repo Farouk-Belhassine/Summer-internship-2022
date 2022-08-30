@@ -1,0 +1,200 @@
+<!-- navbar -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">File</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <span class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createProcedureModal">Create
+                            procedure</span>
+                        <span class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loadProcedureModal">Load
+                            procedure</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<!-- navbar -->
+
+<!-- create procedure Modal -->
+<div class="modal fade" id="createProcedureModal" tabindex="-1" aria-labelledby="createProcedureModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createProcedureModal">Procedure creation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row" class="col-md-6">
+                        <input type="text" placeholder="Procedure Name" [(ngModel)]="procedure.name"
+                            [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="addProcedure(procedure)">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- create procedure Modal -->
+
+<!-- load procedure Modal -->
+<div class="modal fade" id="loadProcedureModal" tabindex="-1" aria-labelledby="loadProcedureModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loadProcedureModal">Procedure selection</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- From Database -->
+            <div *ngIf="!LoadFromFile">
+                <div class="modal-body">
+                    <div class="inline-block">
+                        <div *ngFor='let p of listProcedures'>
+                            <span style="padding:10px">{{p.name}}</span>
+                            <button class="btn btn-primary btn-sm" type="button" (click)="onSelectProcedure(p.id)"
+                                data-bs-dismiss="modal">select</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" (click)="LFF(1)">Load from file?</button>
+                </div>
+            </div>
+            <!-- From Database -->
+
+            <!-- From file -->
+            <div *ngIf="LoadFromFile">
+                <div class="modal-body">
+                    <div class="inline-block">
+                        <input class="form-control" type="file" (change)="FileGrabber($event)">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" (click)="LFF(null)">Load From Database?</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="LoadProcedureFromXml()">upload</button>
+                </div>
+            </div>
+            <!-- From file -->
+
+        </div>
+    </div>
+</div>
+<!-- load procedure Modal -->
+
+<!-- execution comment Modal -->
+<div class="modal fade" id="executionCommentModal" tabindex="-1" aria-labelledby="executionCommentModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="executionCommentModal"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row" class="col-md-6">
+                        <input type="text" placeholder="execution comment" [(ngModel)]="comment"
+                            [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                (click)="execute(selectedProcedure.id, comment)">Execute</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- execution comment Modal -->
+
+<div class="row">
+    <!-- Tree view -->
+    <nav class="tree-nav col-5">
+        <div class="jack fade-in-container" *ngIf="selectedProcedure">
+            <button class="btn btn-success" (click)="createXml(selectedProcedure.id)">Download Procedure</button>
+            <button style="margin-left: 5%;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#executionCommentModal">Execute</button>
+
+            <details class="tree-nav__item is-expandable">
+                <summary class="tree-nav__item-title">{{ selectedProcedure.name }}</summary>
+                <button class="btn btn-primary btn-sm" (click)="addSequence(selectedProcedure.id)"><i
+                        class="icon ion-android-add" style="margin-right: 5%"></i>add sequence</button>
+                <button class="btn btn-danger btn-sm" (click)="deleteProcedure(selectedProcedure.id)"><i
+                        class="icon ion-android-close" style="margin-right: 5%"></i>delete procedure</button>
+
+                <details class="tree-nav__item is-expandable" *ngFor='let sequence of selectedProcedure.sequences'>
+                    <summary class="tree-nav__item-title">Sequence {{sequence.number}}</summary>
+                    <button class="btn btn-primary btn-sm" (click)="addStage(sequence.id, selectedProcedure.id)"><i
+                            class="icon ion-android-add" style="margin-right: 5%"></i>add stage</button>
+                    <button class="btn btn-danger btn-sm" (click)="deleteSequence(selectedProcedure.id,sequence.id)"><i
+                            class="icon ion-android-close" style="margin-right: 5%"></i>delete sequence</button>
+
+                    <details class="tree-nav__item is-expandable" *ngFor='let stage of sequence.stages'>
+                        <summary class="tree-nav__item-title">Stage {{stage.number}}</summary>
+                        <button class="btn btn-primary btn-sm" (click)="addStep(stage.id, selectedProcedure.id)"><i
+                                class="icon ion-android-add" style="margin-right: 5%"></i>add step</button>
+                        <button class="btn btn-danger btn-sm"
+                            (click)="deleteStage(sequence.id, stage.id, selectedProcedure.id)"><i
+                                class="icon ion-android-close" style="margin-right: 5%"></i>delete stage</button>
+
+                        <details class="tree-nav__item" *ngFor='let step of stage.steps'>
+                            <summary class="tree-nav__item-title" (click)="onSelectStep(step.id)"><i
+                                    class="icon ion-information-circled"></i>step
+                                {{step.number}}</summary>
+                            <button class="btn btn-danger btn-sm"
+                                (click)="deleteStep(stage.id, step.id, selectedProcedure.id)"><i
+                                    class="icon ion-android-close" style="margin-right: 5%"></i>delete step</button>
+                            <div class="tree-nav__item">
+
+                            </div>
+                        </details>
+
+                    </details>
+
+                </details>
+
+            </details>
+
+        </div>
+    </nav>
+    <!-- tree view -->
+
+    <!-- step container -->
+    <div class="card-body fade-in-container col-6" *ngIf="selectedStep">
+        <form>
+            <div class="mb-5">
+                <label class="form-label">Step description</label>
+                <textarea class="form-control" rows="9" [(ngModel)]="selectedStep.description"
+                [ngModelOptions]="{standalone: true}"></textarea>
+            </div>
+            <div class="mb-5">
+                <label class="form-label">Step comment</label>
+                <textarea class="form-control" rows="3" [(ngModel)]="selectedStep.comment"
+                [ngModelOptions]="{standalone: true}"></textarea>
+            </div>
+        </form>
+
+        <div class=" modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="clearStep()">Clear</button>
+            <button type="button" class="btn btn-primary" (click)="updateStep(selectedStep)">Save</button>
+        </div>
+        
+    </div>
+    <!-- step container -->
+</div>

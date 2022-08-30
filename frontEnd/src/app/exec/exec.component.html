@@ -1,0 +1,151 @@
+<body style="background-color:#3b3d40;">
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">File</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            <span class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loadProcedureModal">Load
+                                procedure</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <!-- navbar -->
+
+    <!-- load procedure Modal -->
+    <div class="modal fade" id="loadProcedureModal" tabindex="-1" aria-labelledby="loadProcedureModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loadProcedureModal">Procedure selection</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- From Database -->
+                <div class="modal-body">
+                    <div class="inline-block">
+                        <div *ngFor='let p of listProcedures'>
+                            <span style="padding:10px,">{{p.name}}</span>
+                            <button class="btn btn-primary btn-sm" type="button" (click)="onSelectProcedure(p.id)"
+                                data-bs-dismiss="modal">select</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+                <!-- From Database -->
+
+            </div>
+        </div>
+    </div>
+    <!-- load procedure Modal -->
+
+    <!-- selection -->
+    <div *ngIf="selectedProcedure">
+        <h1>{{selectedProcedure.name}}</h1>
+        <hr>
+
+        <ul *ngIf="!selectedSequence">
+            <li *ngFor="let sequence of selectedProcedure.exeSequences" (click)="onSelectSequence(sequence)" id="te">
+                Sequence {{sequence.number}}</li>
+        </ul>
+
+        <div *ngIf="selectedSequence">
+            <h2>Sequence {{selectedSequence.number}}</h2>
+            <hr>
+
+            <ul *ngIf="!selectedStage">
+                <li *ngFor="let stage of selectedSequence.exeStages" (click)="onSelectStage(stage)" id="te">stage
+                    {{stage.number}}</li>
+            </ul>
+            <div *ngIf="!selectedStage" class="container row">
+                <span class=" col-4" (click)="backToSequenceSelection()">
+                    <i class="icon ion-ios-undo"></i>
+                    <p id="te">To sequence selection</p>
+                </span>
+            </div>
+
+            <div *ngIf="selectedStage">
+                <h2>stage {{selectedStage.number}}</h2>
+                <hr>
+
+                <ul *ngIf="!selectedStep">
+                    <li *ngFor="let step of selectedStage.exeSteps" (click)="onSelectStep(step)" id="te">step
+                        {{step.number}}</li>
+                </ul>
+                <div *ngIf="!selectedStep" class="container row">
+                    <span class=" col-4" (click)="backToStageSelection()">
+                        <i class="icon ion-ios-undo"></i>
+                        <p id="te">To stage selection</p>
+                    </span>
+                </div>
+
+                <div *ngIf="selectedStep">
+                    <form>
+                        <div class="mb-5">
+                            <img src="assets/test_snip.PNG">
+                            <br>
+                            <label style="margin-left: 20px;" class="form-label">{{selectedStep.description}}</label>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="1">Measure name: </td>
+                                        <td colspan="2">Measure unit: </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="1">Read measure: </td>
+                                        <td colspan="1">Min accepted: </td>
+                                        <td colspan="1">Max accepted: </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">PLC status: </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="white-space: pre-line">Operation history: {{selectedStep.comment}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mb-5">
+                            <label style="margin-left: 20px;" class="form-label">Comment</label>
+                            <textarea style="margin-left: 20px;" class="form-control" rows="3"
+                                [(ngModel)]="comment" [ngModelOptions]="{standalone: true}"></textarea>
+                        </div>
+                    </form>
+
+                    <div class="container row">
+                        <span class=" col-4" (click)="backToStepSelection()">
+                            <i class="icon ion-ios-undo"></i>
+                            <p id="te">To step selection</p>
+                        </span>
+                        <span class="col-2" (click)="back()">
+                            <i class="icon ion-android-arrow-dropleft-circle"></i>
+                            <p id="te">previous</p>
+                        </span>
+                        <span class="col-2" (click)="updateStep(selectedStep, comment)">
+                            <i class="icon ion-ios-checkmark"></i>
+                            <p id="te">Validate</p>
+                        </span>
+                        <span class="col-2" (click)="next()">
+                            <i class="icon ion-android-arrow-dropright-circle"></i>
+                            <p id="te">next</p>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- selection -->
+
+</body>
