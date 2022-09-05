@@ -7,11 +7,11 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class ProcedureService {
 
-  readonly API_URL_PROCEDURE='http://localhost:8083/condorweb/procedure';
-  readonly API_URL_SEQUENCE='http://localhost:8083/condorweb/sequence';
-  readonly API_URL_STAGE='http://localhost:8083/condorweb/stage';
-  readonly API_URL_STEP='http://localhost:8083/condorweb/step';
-  readonly API_URL_EXEPROCEDURE='http://localhost:8083/condorweb/exeProcedure';
+  readonly API_URL_PROCEDURE='http://localhost:8083/2k22internship/procedure';
+  readonly API_URL_SEQUENCE='http://localhost:8083/2k22internship/sequence';
+  readonly API_URL_STAGE='http://localhost:8083/2k22internship/stage';
+  readonly API_URL_STEP='http://localhost:8083/2k22internship/step';
+  readonly API_URL_EXEPROCEDURE='http://localhost:8083/2k22internship/exeProcedure';
 
   constructor(private httpClient: HttpClient) { }
 

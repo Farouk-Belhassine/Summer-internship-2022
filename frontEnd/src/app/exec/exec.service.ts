@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ExecService {
 
-  readonly API_URL_PROCEDURE='http://localhost:8083/condorweb/exeProcedure';
-  readonly API_URL_STEP='http://localhost:8083/condorweb/exeStep';
+  readonly API_URL_PROCEDURE='http://localhost:8083/2k22internship/exeProcedure';
+  readonly API_URL_STEP='http://localhost:8083/2k22internship/exeStep';
 
   constructor(private httpClient: HttpClient) { }
 

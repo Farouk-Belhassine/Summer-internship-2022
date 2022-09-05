@@ -18,19 +18,19 @@ public class exeProcedureController {
     @Autowired
     exeIprocedureService IprocedureService;
 
-    //http://localhost:8083/condorweb/exeProcedure/getAllExeProcedures
+    //http://localhost:8083/2k22internship/exeProcedure/getAllExeProcedures
     @GetMapping("/getAllExeProcedures")
     public List<ExeProc> getAllExeProcedures() {
         return IprocedureService.getAllProceduresNoSeq();
     }
 
-    //http://localhost:8083/condorweb/exeProcedure/getProcedure/1
+    //http://localhost:8083/2k22internship/exeProcedure/getProcedure/1
     @GetMapping("/getProcedure/{id}")
     public ExeProc getProcedure(@PathVariable("id") Long id) {
         return IprocedureService.getProcedure(id);
     }
 
-    //http://localhost:8083/condorweb/exeProcedure/affectProcedureToExec/1
+    //http://localhost:8083/2k22internship/exeProcedure/affectProcedureToExec/1
     @PostMapping("/affectProcedureToExec/{id}")
     public void affectProcedureToExec(@PathVariable("id") Long procId, @RequestParam("comment") String comment) throws JAXBException, FileNotFoundException { IprocedureService.affectProcedureToExec(procId,comment); }
 }

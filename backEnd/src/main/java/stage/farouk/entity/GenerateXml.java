@@ -34,11 +34,4 @@ public class GenerateXml {
         ExeProc p = (ExeProc) unmarshaller.unmarshal(new FileReader(procName+".xml"));
         return p;
     }
-
-    public ExeProc FromXmlToExec(File file) throws JAXBException{
-        JAXBContext context = JAXBContext.newInstance(ExeProc.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        ExeProc p= (ExeProc)unmarshaller.unmarshal(file);
-        return p;
-    }
 }

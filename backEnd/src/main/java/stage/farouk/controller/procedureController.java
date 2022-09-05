@@ -22,19 +22,19 @@ public class procedureController {
     @Autowired
     IprocedureService IprocedureService;
 
-    //http://localhost:8083/condorweb/procedure/getAllProcedures
+    //http://localhost:8083/2k22internship/procedure/getAllProcedures
     @GetMapping("/getAllProcedures")
     public List<Proc> getAllProcedures() {
         return IprocedureService.getAllProceduresNoSeq();
     }
 
-    //http://localhost:8083/condorweb/procedure/getProcedure/1
+    //http://localhost:8083/2k22internship/procedure/getProcedure/1
     @GetMapping("/getProcedure/{id}")
     public Proc getProcedure(@PathVariable("id") Long id) {
         return IprocedureService.getProcedure(id);
     }
 
-    //http://localhost:8083/condorweb/procedure/addProcedure
+    //http://localhost:8083/2k22internship/procedure/addProcedure
     @PostMapping("/addProcedure")
     @ResponseBody
     public Proc addProcedure(@RequestBody Proc p)
@@ -42,7 +42,7 @@ public class procedureController {
         return IprocedureService.addProcedure(p);
     }
 
-    //http://localhost:8083/condorweb/procedure/updateProcedure
+    //http://localhost:8083/2k22internship/procedure/updateProcedure
     @PutMapping("/updateProcedure")
     @ResponseBody
     public Proc updateProcedure(@RequestBody Proc p) {
@@ -50,27 +50,27 @@ public class procedureController {
     }
 
 
-    //http://localhost:8083/condorweb/procedure/deleteProcedure/2
+    //http://localhost:8083/2k22internship/procedure/deleteProcedure/2
     @DeleteMapping("/deleteProcedure/{id}")
     @ResponseBody
     public void deleteProcedure(@PathVariable("id") Long id) {
         IprocedureService.deleteProcedure(id);
     }
 
-    //http://localhost:8083/condorweb/procedure/addSequence/1
+    //http://localhost:8083/2k22internship/procedure/addSequence/1
     @PostMapping("/addSequence/{id}")
     public void addNAffectSequence(@PathVariable("id") Long procId){
         IprocedureService.addNAffectSequence(procId);
     }
 
-    //http://localhost:8083/condorweb/procedure/deleteSequence/1,1
+    //http://localhost:8083/2k22internship/procedure/deleteSequence/1,1
     @DeleteMapping("/deleteSequence/{procId},{sequenceId}")
     @ResponseBody
     public void deleteSequence(@PathVariable("procId") Long procId, @PathVariable("sequenceId") Long sequenceId) {
         IprocedureService.deleteSequence(procId,sequenceId);
     }
 
-    //http://localhost:8083/condorweb/procedure/LoadProcedureFromXml
+    //http://localhost:8083/2k22internship/procedure/LoadProcedureFromXml
     @PostMapping("/LoadProcedureFromXml")
     @ResponseBody
     public Proc LoadProcedureFromXml(@RequestParam("file") MultipartFile Mfile) throws JAXBException, IOException {
@@ -87,7 +87,7 @@ public class procedureController {
         return IprocedureService.LoadXml(file);
     }
 
-    //http://localhost:8083/condorweb/procedure/createXml
+    //http://localhost:8083/2k22internship/procedure/createXml
     @GetMapping("/createXml/{procId}")
     public Blob createXml(@PathVariable("procId") Long procId) throws JAXBException, IOException, SQLException {
         File file = IprocedureService.createXml(procId);

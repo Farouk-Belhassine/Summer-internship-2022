@@ -14,13 +14,13 @@ public class stageController {
     @Autowired
     IstageService IstageService;
 
-    //http://localhost:8083/condorweb/stage/addStep/1
+    //http://localhost:8083/2k22internship/stage/addStep/1
     @PostMapping("/addStep/{id}")
     public void addNAffectStep(@PathVariable("id") Long stageId){
         IstageService.addNAffectStep(stageId);
     }
 
-    //http://localhost:8083/condorweb/stage/deleteStep/1,1
+    //http://localhost:8083/2k22internship/stage/deleteStep/1,1
     @DeleteMapping("/deleteStep/{stageId},{stepId}")
     @ResponseBody
     public void deleteStep(@PathVariable("stageId") Long stageId, @PathVariable("stepId") Long stepId) {

@@ -28,7 +28,4 @@ public class ExeStep {
 
     @XmlElement
     private String comment;
-
-    /*@ManyToOne
-    ExeStage ExeStage;*/
 }

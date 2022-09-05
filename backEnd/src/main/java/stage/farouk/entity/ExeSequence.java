@@ -24,9 +24,6 @@ public class ExeSequence {
     @XmlElement
     private int number;
 
-    /*@ManyToOne
-    ExeProc ExeProc;*/
-
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @OrderBy("number")
     @XmlElement(name="Stage")

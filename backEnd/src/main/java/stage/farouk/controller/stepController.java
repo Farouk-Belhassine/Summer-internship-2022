@@ -12,13 +12,13 @@ public class stepController {
     @Autowired
     IstepService IstepService;
 
-    //http://localhost:8083/condorweb/step/getStep/1
+    //http://localhost:8083/2k22internship/step/getStep/1
     @GetMapping("/getStep/{id}")
     public Step getStep(@PathVariable("id") Long id) {
         return IstepService.getStep(id);
     }
 
-    //http://localhost:8083/condorweb/step/updateStep
+    //http://localhost:8083/2k22internship/step/updateStep
     @PutMapping("/updateStep")
     @ResponseBody
     public Step updateStep(@RequestBody Step s) {

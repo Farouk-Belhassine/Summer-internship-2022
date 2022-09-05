@@ -24,9 +24,6 @@ public class ExeStage {
     @XmlElement
     private int number;
 
-    /*@ManyToOne
-    ExeSequence ExeSequence;*/
-
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @XmlElement(name="Step")
     private List<ExeStep> exeSteps;

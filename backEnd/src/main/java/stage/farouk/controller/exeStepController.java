@@ -12,13 +12,13 @@ public class exeStepController {
     @Autowired
     exeIstepService exeIstepService;
 
-    //http://localhost:8083/condorweb/exeStep/getExeStep/1
+    //http://localhost:8083/2k22internship/exeStep/getExeStep/1
     @GetMapping("/getExeStep/{id}")
     public ExeStep getStep(@PathVariable("id") Long id) {
         return exeIstepService.getStep(id);
     }
 
-    //http://localhost:8083/condorweb/exeStep/updateExeStep
+    //http://localhost:8083/2k22internship/exeStep/updateExeStep
     @PutMapping("/updateExeStep")
     @ResponseBody
     public ExeStep updateStep(@RequestBody ExeStep s) {

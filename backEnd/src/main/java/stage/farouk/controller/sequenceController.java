@@ -12,11 +12,11 @@ public class sequenceController {
     @Autowired
     IsequenceService IsequenceService;
 
-    //http://localhost:8083/condorweb/sequence/addStage/1
+    //http://localhost:8083/2k22internship/sequence/addStage/1
     @PostMapping("/addStage/{id}")
     public void addNAffectStage(@PathVariable("id") Long sequenceId){ IsequenceService.addNAffectStage(sequenceId); }
 
-    //http://localhost:8083/condorweb/sequence/deleteStage/1,1
+    //http://localhost:8083/2k22internship/sequence/deleteStage/1,1
     @DeleteMapping("/deleteStage/{sequenceId},{stageId}")
     @ResponseBody
     public void deleteStage(@PathVariable("sequenceId") Long sequenceId, @PathVariable("stageId") Long stageId) {
