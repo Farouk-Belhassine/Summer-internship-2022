@@ -1,7 +1,7 @@
 ## Back end
 **1-** install WAMP server or MySql on your machine.
 **2-** Install an editor that suits you like IntelliJ from 'https://www.jetbrains.com/idea/' .
-**3-** Install JDK from https://download.oracle.com/java/18/latest/jdk-18_windows-x64_bin.exe (if you're not on windows just download the appropriet JDK for your system from 'https://www.oracle.com/java/technologies/downloads/' ).
+**3-** Install JDK from https://download.oracle.com/java/18/latest/jdk-18_windows-x64_bin.exe (if you're not on windows just download the appropriate JDK for your system from 'https://www.oracle.com/java/technologies/downloads/' ).
 **4-** Make sure your DBMS is running then build and run the project from the 'backEnd' folder.
 
 ## Front end
