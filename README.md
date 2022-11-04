@@ -12,3 +12,5 @@
 **5-** Once the modules download is complete, to launch your project type the command: ng serve --open .
 **6-** the pages are at 'http://localhost:4200/exec' and 'http://localhost:4200/procedure' .
 **7-** to assure the connection between the front end and back end, make sure they're both running at the same time .
+
+### Ps: this is only a prototype
